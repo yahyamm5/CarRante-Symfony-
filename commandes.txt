@@ -1,0 +1,17 @@
+symfony serve
+
+composer require symfony/flex
+
+composer require symfony/twig-bundle
+
+composer require maker --dev
+
+php bin/console make:migration
+
+php bin/console doctrine:migrations:migrate
+
+composer require --dev orm-fixtures
+
+php bin/console doctrine:fixtures:load
+
+php bin/console doctrine:fixtures:load --append
