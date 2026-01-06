@@ -40,6 +40,7 @@ final class LeaseAgreementController extends AbstractController {
                 $car = $carRepository->findOneBy(['brand' => $carName]);
                 $customer = $customerRepository->findOneBy(['name' => $customerName]);
                 $leaseAgreement->setCustomer($customer);
+                $car->setStatus("Rented");
                 $leaseAgreement->setCar($car);
             }
             $leaseAgreement->setTotalPrice($data['TotalPrice'] ?? 0);
@@ -61,6 +62,12 @@ final class LeaseAgreementController extends AbstractController {
             throw $this->createNotFoundException('No LeaseAgreement found for id : '.$lease_id);
         }
 
+        $car = $leaseAgreement->getCar();
+        if ($car) {
+            $car->setStatus('Available');
+            $entityManager->persist($car);
+        }
+
         $entityManager->remove($leaseAgreement);
         $entityManager->flush();
         
@@ -71,8 +78,10 @@ final class LeaseAgreementController extends AbstractController {
     public function display(LeaseAgreementRepository $repository): Response {
 
         $LeaseAgreements = $repository->findAll();
+
         $data = [];
         foreach ($LeaseAgreements as $LeaseAgreement) {
+
             $data[] = [
                 'id' => $LeaseAgreement->getId(),
                 'StartDate' => $LeaseAgreement->getStartDate(),

@@ -58,7 +58,7 @@ return (
                 onChange={(e) => SetBrand(e.target.value)}
               >
                 {car.map((car) => (
-                  <MenuItem key={car.id} value={car.brand} >{car.brand}</MenuItem>
+                  car.status == "Available" ? (<MenuItem key={car.id} value={car.brand} >{car.brand}</MenuItem> ) : null
                 ))}
               </TextField>
             </Grid>
@@ -122,7 +122,6 @@ return (
               >
                 <MenuItem value="pending">Pending</MenuItem>
                 <MenuItem value="active">Active</MenuItem>
-                <MenuItem value="completed">Completed</MenuItem>
               </TextField>
             </Grid>
 

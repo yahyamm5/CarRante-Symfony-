@@ -6,7 +6,7 @@ import {
   IconButton
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { LeaseAgreementApiStore } from "../API/ApiStore";
+import { CarsAPiStore, LeaseAgreementApiStore } from "../API/ApiStore";
 
 const LeaseAgreement = () => {
 
@@ -19,7 +19,6 @@ const LeaseAgreement = () => {
     const handleDeleteLease = async (e) => {
     try {
         await delete_LeaseAgreement(e);
-        
       } catch (error) {
         console.log(error);
       }
@@ -31,7 +30,7 @@ const LeaseAgreement = () => {
 
     return (
     <Box sx={{ p: 4 }}>
-      <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold' }}>Vehicle Fleet</Typography>
+      <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold' }}>Contracts</Typography>
       
       <TableContainer component={Paper} sx={{ borderRadius: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
         <Table>
@@ -55,7 +54,7 @@ const LeaseAgreement = () => {
                 <TableCell>{LeaseAgreement.StartDate}</TableCell>
                 <TableCell>{LeaseAgreement.EndDate}</TableCell>
                 <TableCell>${LeaseAgreement.TotalPrice}</TableCell>
-                <TableCell>{LeaseAgreement.Status}</TableCell>
+                <TableCell>{LeaseAgreement.StartDate == LeaseAgreement.EndDate ? LeaseAgreement.Status = "completed" : LeaseAgreement.Status}</TableCell>
                 <TableCell>
                   <IconButton href="/contracts" onClick={() => handleDeleteLease(LeaseAgreement.id)} >
                     <DeleteIcon sx={{color:"lightcoral"}} ></DeleteIcon>

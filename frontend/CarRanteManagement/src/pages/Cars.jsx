@@ -5,7 +5,7 @@ import {
   Button,
   IconButton
 } from '@mui/material';
-import { CarsAPiStore } from "../API/ApiStore";
+import { CarsAPiStore, LeaseAgreementApiStore } from "../API/ApiStore";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Cars = () => {
@@ -55,7 +55,7 @@ const Cars = () => {
                 <TableCell>{car.year}</TableCell>
                 <TableCell>${car.dailyPrice}</TableCell>
                 <TableCell>
-                  <Chip 
+                  <Chip
                     label={car.status} 
                     color={car.status === 'Available' ? 'success' : 'warning'} 
                     size="small" 
